@@ -51,7 +51,7 @@ def edge_calc(g):
     for xi in range(len(x)):
         for i in range(x[xi] - y[xi]):
             nodl.append(xi)
-    nodestoadd = [len(g.nodes()) + i for i in range(e)]
+    nodestoadd = [len(g.nodes()) + i for i in range(4)]
     # print(nodl, nodestoadd)
     for combo in combinations(nodl, e):
         ga = g.copy()
@@ -64,12 +64,12 @@ def edge_calc(g):
                 # print(ga)
                 appen = False
                 break
-            elif not nx.check_planarity(ga)[0]:
-                appen = False
+        if not nx.check_planarity(ga)[0]:
+            appen = False
         if appen:
             garr.append(ga)
             # print(ga.edges())
-            # print(combo)
+            print(combo)
     # print(len(garr))
     return garr
 edgeset = [
@@ -98,7 +98,11 @@ edgeset2 = [ [(0, 1), (0, 2), (1, 2), (2, 3), (3, 4)],
 [(0, 1), (0, 3), (1, 2), (1, 3), (1, 4), (2, 3), (3, 4)],
 [(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 4), (2, 3), (3, 4)],
              ]
-for ed in edgeset2:
+edgeset3 = [
+
+[(0, 1), (0, 3), (1, 2), (1, 3), (1, 4), (2, 3), (3, 4)]
+             ]
+for ed in edgeset3:
     g = nx.Graph()
     g.add_edges_from(ed, id=1)
     # print('G is ', g.edges())
