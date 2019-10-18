@@ -1,4 +1,3 @@
-import flask
 import json
 import networkx as nx
 import collections
@@ -6,11 +5,10 @@ import collections
 from networkx.readwrite import json_graph
 from networkx.algorithms.isomorphism import GraphMatcher
 from networkx.algorithms import tournament
-init=5
+init=4
 g = nx.Graph()
 g= nx.path_graph(init)
 print(g.edges)
-
 def makeBig(glist):
     garr = []
     isomorphics = 0
@@ -58,17 +56,17 @@ arg = []
 print('Inner Graphs for n = {}: '.format(init-1), 1)
 arg.append(makeBig([g]))
 nex = arg[0]
-for i in range(11):
+for i in range(20):
     g2 = makeBig(nex)
     sum = 0
     for b in nex:
         app= True
-        bpp = False
+        bpp = True
         cpp= True
         dpp= True
         d = b.copy()
 
-# bridge case -----------------------
+        # bridge case -----------------------
 
         for a1 in b.nodes():
             for b1 in b.nodes():
@@ -84,23 +82,23 @@ for i in range(11):
                                 app =False
                                 # print("bridge")
 
-# cut with cycle case --------------------------
-        cut2 = list(nx.articulation_points(d))
-        if len(cut2)==0:
-            bpp=True
-        for c1 in cut2:
-            # print("cut")
-            d.subgraph([n for n in d.neighbors(c1)])
-            try:
-                nx.find_cycle(d.subgraph([n for n in d.neighbors(c1)]))
-                # print("try")
-            except:
-                a=0
-                bpp =True
-                # print('except')
+        # # cut with cycle case --------------------------
+        # cut2 = list(nx.articulation_points(d))
+        # if len(cut2)==0:
+        #     bpp=True
+        # else:
+        #     for c1 in cut2:
+        #         # print("cut")
+        #         # d.subgraph([n for n in d.neighbors(c1)])
+        #         try:
+        #             nx.find_cycle(d.subgraph([n for n in d.neighbors(c1)]))
+        #             # print("try")
+        #         except:
+        #             bpp =True
+        #             # print('except')
 
 
-# just cycle case , degree>2--------------------------------
+        # just cycle case , degree>2--------------------------------
         reg= []
         r5 = []
         for n1 in b.nodes():
@@ -110,6 +108,8 @@ for i in range(11):
                 try:
                     r4 = (list(nx.find_cycle(f, orientation='ignore')))
                     # print(r4)
+                    # if n1 in list(nx.articulation_points(e)):
+                    #     bpp=False
                     if len(r4)!=len(f) and len(r4)>=4:
                         cpp= False
                     else:
@@ -129,7 +129,7 @@ for i in range(11):
                 if collections.Counter(i1)==collections.Counter(i2):
                     # print(i1)
                     cpp=False
-
+                    
         # for r1 in reg:
         #     for r2 in reg:
         #         if len(list(nx.all_simple_paths(b, source=r1, target=r2, cutoff=2)))>3:
@@ -140,9 +140,9 @@ for i in range(11):
         if app and bpp and cpp and dpp:
             sum = sum +1
             print (b.edges)
-    print('Inner Graphs for n = {}: '.format(i+init), sum)
+    print("Inner Graphs for n = {}: ".format(i+init),sum)
     # for g in nex:
-    #     print(g.edges())
+    #     print(g.edges())1
     arg.append(g2)
     nex = g2
 
