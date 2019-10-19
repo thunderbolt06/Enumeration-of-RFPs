@@ -1,5 +1,5 @@
-import flask
-import json
+# import flask
+# import json
 import networkx as nx
 from itertools import combinations
 # import matplotlib.pyplot as plt
@@ -99,8 +99,7 @@ edgeset2 = [ [(0, 1), (0, 2), (1, 2), (2, 3), (3, 4)],
 [(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 4), (2, 3), (3, 4)],
              ]
 edgeset3 = [
-
-[(0, 1), (0, 3), (1, 2), (1, 3), (1, 4), (2, 3), (3, 4)]
+[(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 4), (1, 5), (2, 3), (3, 4), (4, 5)]
              ]
 for ed in edgeset3:
     g = nx.Graph()

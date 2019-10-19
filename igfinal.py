@@ -140,6 +140,9 @@ for i in range(20):
         if app and bpp and cpp and dpp:
             sum = sum +1
             print (b.edges)
+            nx.draw_planar(g,labels=None, font_size=12, font_color='k', font_family='sans-serif', font_weight='normal', alpha=1.0, bbox=None, ax=None)
+            plt.show()
+
     print("Inner Graphs for n = {}: ".format(i+init),sum)
     # for g in nex:
     #     print(g.edges())1

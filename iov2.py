@@ -4,9 +4,12 @@ import networkx as nx
 from itertools import combinations
 # import matplotlib.pyplot as plt
 from networkx.readwrite import json_graph
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from networkx.algorithms.isomorphism import GraphMatcher
 from itertools import cycle
+import os
+import collections
+
 def wmatch(e1, e2):
     return e1['id'] == e2['id']
 
@@ -55,8 +58,19 @@ def edge_calc(g):
     nodestoadd = [len(g.nodes()) + i for i in range(4)]
     # print(nodl, nodestoadd)
     n=len(g.nodes())
-
-
+    if e==0:
+        p=n
+        g.add_edges_from([(n+i,n+i+1)  for i in range(3)],id=2)
+        g.add_edges_from([(n,n+3)],id=2)
+        for r in range(n):
+            while y[r]>0:
+                g.add_edges_from([(r,p)],id=2)
+                y[r]-=1
+                p+=1
+                if p is n+4 and y[r]>0:
+                    p=n
+            p-=1
+        garr.append(g)
     for combo in combinations(nodl, e):
         ga = g.copy()
         ga.add_nodes_from(nodestoadd)
@@ -64,26 +78,108 @@ def edge_calc(g):
         z=y.copy()
         for i,nod in enumerate(combo):
             z[nod]+=1
-        zx=z.copy()
-        p=n
-        pool =cycle([(n+i) for i in range(4)])
+        zx=[]
+        o=z.copy()
+        for i in range(len(z)):
+            zx.append((i,z[i]))
         
-        for r in range(n):
-            while zx[r]>0:
-                ga.add_edges_from([(r,p)])
-                zx[r]-=1
-                p+=1
-                if p is n+4 and zx[r]>0:
-                    p=n+1
+        # p=n
+                                                    # pool =cycle([(n+i) for i in range(4)])
+                                                    # for i in range(len(z)):
+                                                    #     for j in range(i+1,len(z)):
+                                                    #         if z[i]<z[j]:
+                                                    #             buf=z[j]
+                                                    #             z[j]=z[i]
+                                                    #             z[i]=buf
+                                                    #             buf2=zx[j]
+                                                    #             zx[j]=zx[i]
+                                                    #             zx[i]=buf2
+                                                    # # print(zx,"hi")
+                                                    # v=nodestoadd.copy()
+                                                    # i=7
+                                                    # h=g.copy()
+                                                    # for (a,b) in zx:
+                                                    #     if b==3:
+                                                    #         g.add_edges_from([(i-1,a),(i,a),(i+1,a)])
+                                                    #         o[a]-=3
+                                                    #         j=i-1
+                                                    #         k=i+1
+                                                            
+                                                    #         try:
+                                                    #             while(h.neighbors(a)):
+                                                    #                 ne = list(h.neighbors(a))
+                                                    #                 h.remove_node(a)
+                                                    #                 ne.sort()
+                                                    #                 if len(ne)==1 and o[ne[0]]>=2:
+                                                    #                     g.add_edges_from([(j,ne[0]),(k,ne[0])])
+                                                    #                     o[ne[0]]-=2
+                                                    #                     a=ne[0]
+                                                    #                     # h.remove_node(ne[0])
+                                                    #                     break
+                                                                    
+                                                    #                 elif len(ne)>1:   
+                                                    #                     if o[ne[1]]>=1 and o[ne[0]]>=1:
+                                                    #                         g.add_edges_from([(ne[0],j),(ne[1],k)])
+                                                    #                         o[ne[0]]-=1
+                                                    #                         o[ne[1]]-=1
+                                                    #                         if o[ne[0]]!=0:
+                                                    #                             g.add_edges_from([(ne[0],i) for i in range(o[ne[0]])])
+                                                    #                             o[ne[0]]=0
+                                                    #                             # h.remove_node(o[ne[0]])
+                                                    #                             a=ne[0]
+                                                    #                             # h.remove_node(ne[0])
+                                                    #                             break
+                                                    #                         if o[ne[1]]!=0:
+                                                    #                             g.add_edges_from([(ne[1],i) for i in range(o[ne[1]])])
+                                                    #                             o[ne[1]]=0
+                                                    #                             # h.remove_node(o[ne[0]])
+                                                    #                             a=ne[1]
+                                                    #                             break
+                                                    #                 else:
+                                                    #                     break
+                                                    #         except:
+                                                    #             pass
+                                                    #     break
+
+                    
+        # i=n+2
+        # for t in range(n-1,-1,-1):
+        #     if z[t]==3:
+        #         ga.add_edges_from([(i-1,t),(i,t),(i+1,t)])
+        #         g.add_edges_from([(i-1,t-1),(i+1,t-1)])
+        #         i-=1
+        #         for r in range(t-2,-1,-1):
+        #             while z[r]>0:
+        #                 ga.add_edges_from([(r,i)])
+        #                 z[r]-=1
+        #                 i-=1
+        #                 if i is 0 and z[r]>0:
+        #                     i=n+3
+                    
+        #             i+=1
+        cutlist = sort(list(nx.articulation_points(ga)))
+        cutpos = 0
+        current_partition = []
+        cutpartition = []
+        for i in range(n):
+            if i != cutlist[cutpos]:
+                current_partition.append[i]
+            else:
+                cutpos += 1
+                cutpartition.append(current_partition)
+                current_partition = []
+        
+        for cutvertex in cutlist:
+            ga.add_edges_from([(cutvertex,n+1),(cutvertex,n+3)])
+        for non_cut_part in cutpartition:
             
-            p-=1
+
+
         
-        ga.add_edges_from([(n+i,n+i+1)  for i in range(3)])
-        ga.add_edge(n,n+3)
         # print(ga.edges())
         appen = True
         for el in garr:
-            if nx.is_isomorphic(el, ga):
+            if nx.is_isomorphic(el, ga,edge_match=None):
                 # print(ga)
                 appen = False
                 break
@@ -97,8 +193,7 @@ def edge_calc(g):
     return garr
 edgeset3 = [
 
-                [(0, 1), (0, 2), (0, 3), (1, 2), (2, 3)]
-
+                [(0, 1), (0, 2), (0, 3), (1, 2), (2, 3), (3, 4), (4, 5)]
              ]
 for ed in edgeset3:
     g = nx.Graph()
@@ -106,13 +201,26 @@ for ed in edgeset3:
     n= len(g.nodes())
     # print('G is ', g.edges())
     glist = edge_calc(g)
+    i=0
+    cpp=True
     for gb in glist:
         gb.add_edges_from([(n+i,n+i+1)  for i in range(3)])
         gb.add_edge(n,n+3)
+        r5=[]
+        
+                        
+        # plt.figure(i)
+        # nx.draw_planar(gb,labels=None, font_size=12, font_color='k', font_family='sans-serif', font_weight='normal', alpha=1.0, bbox=None, ax=None)
+        # os.mkdir('n={}'.format(n+4))
+        # os.mkdir('n={}/export{}'.format(n+4,len(edgeset3[0])))
+        # plt.savefig("n={}/export{}/fig{}.png".format(n+4,len(edgeset3[0]),i))
+        # plt.savefig("export/fig{}.png".format(i))
+
         print(gb.edges())
+        i+=1
     # for gn in glist:
     # print(gn.edges())
-    print('the final no.: {}'.format(len(glist)))
+    print('the final no.: {}'.format(i))
     print('\n\n')
 
 
