@@ -1,11 +1,12 @@
 import json
 import networkx as nx
 import collections
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from networkx.readwrite import json_graph
 from networkx.algorithms.isomorphism import GraphMatcher
 from networkx.algorithms import tournament
-init=4
+import os
+init=8
 g = nx.Graph()
 g= nx.path_graph(init)
 print(g.edges)
@@ -54,9 +55,17 @@ def makeBig(glist):
 
 arg = []
 print('Inner Graphs for n = {}: '.format(init-1), 1)
+try:
+    os.mkdir("RFP/Len={}".format(init))
+except:
+    pass
+ra=1
+plt.figure(ra)
+nx.draw_planar(g,labels=None, font_size=12, font_color='k', font_family='sans-serif', font_weight='normal', alpha=1.0, bbox=None, ax=None)
+plt.savefig("RFP/Len={}/{}.png".format(init,ra))
 arg.append(makeBig([g]))
 nex = arg[0]
-for i in range(20):
+for i in range(40):
     g2 = makeBig(nex)
     sum = 0
     for b in nex:
@@ -139,13 +148,18 @@ for i in range(20):
 # final---------
         if app and bpp and cpp and dpp:
             sum = sum +1
+            ra+=1
             print (b.edges)
-            nx.draw_planar(g,labels=None, font_size=12, font_color='k', font_family='sans-serif', font_weight='normal', alpha=1.0, bbox=None, ax=None)
-            plt.show()
+            plt.figure(ra)
+            nx.draw_planar(b,labels=None, font_size=12, font_color='k', font_family='sans-serif', font_weight='normal', alpha=1.0, bbox=None, ax=None)
+            plt.savefig('RFP/Len={}/{}.png'.format(init,ra))
 
     print("Inner Graphs for n = {}: ".format(i+init),sum)
+    i=1
     # for g in nex:
-    #     print(g.edges())1
+        # i+=1
+        # print(g.edges())
+        
     arg.append(g2)
     nex = g2
 
