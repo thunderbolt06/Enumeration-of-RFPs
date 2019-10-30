@@ -177,14 +177,7 @@ def edge_calc(g):
 
         
         # print(ga.edges())
-        appen = True
-        for el in garr:
-            if nx.is_isomorphic(el, ga,edge_match=None):
-                # print(ga)
-                appen = False
-                break
-        if not nx.check_planarity(ga)[0]:
-            appen = False
+        
         if appen:
             garr.append(ga)
             # print(ga.edges())

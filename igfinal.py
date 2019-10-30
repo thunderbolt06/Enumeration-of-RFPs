@@ -71,7 +71,8 @@ def makeBig(glist):
 
 
 # ---------------------main---------------------------------------------------------------------------------------------------
-init=5
+init=10
+
 g= nx.path_graph(init)
 try:
     os.mkdir("RFP2")
@@ -125,23 +126,3 @@ while(nex):
 
 
 
-# ra=1
-# plt.figure(ra)
-# nx.draw_planar(g,labels=None, font_size=12, font_color='k', font_family='sans-serif', font_weight='normal', alpha=1.0, bbox=None, ax=None)
-# plt.savefig("RFP/Len={}/{}.png".format(init,ra))
-# arg.append(makeBig([g]))
-# nex = arg[0]
-# for i in range(40):
-#     g2 = makeBig(nex)
-#     sum = 0
-#     for b in nex:
-#         sum = sum +1
-#         ra+=1
-#         print (b.edges)
-        # plt.figure(ra)
-        # nx.draw_planar(b,labels=None, font_size=12, font_color='k', font_family='sans-serif', font_weight='normal', alpha=1.0, bbox=None, ax=None)
-        # plt.savefig('RFP/Len={}/{}.png'.format(init,ra))
-
-#     print("Inner Graphs for n = {}: ".format(i+init),sum)
-#     arg.append(g2)
-#     nex = g2
