@@ -5,6 +5,8 @@ from networkx.readwrite import json_graph
 from networkx.algorithms.isomorphism import GraphMatcher
 from networkx.algorithms import tournament
 import os
+import warnings
+warnings.simplefilter("ignore")
 # ----------------------makebig----------------------------------------------------------------------------------------------
 def makeBig(glist):
     garr = []
@@ -61,6 +63,8 @@ def makeBig(glist):
                 for i2 in r5[j1:]:
                     if collections.Counter(i1)==collections.Counter(i2):
                         appen=False
+
+                        
             if ga.size()>3*init-7:
                 appen=False
             
@@ -71,15 +75,15 @@ def makeBig(glist):
 
 
 # ---------------------main---------------------------------------------------------------------------------------------------
-init=10
+init=9
 
 g= nx.path_graph(init)
 try:
-    os.mkdir("RFP2")
+    os.mkdir("RFP3")
 except:
     pass
 try:
-    os.mkdir("RFP2/Len={}".format(init))
+    os.mkdir("RFP3/Len={}".format(init))
 except:
     pass
 ra=1
@@ -89,12 +93,11 @@ while(nex):
     for x in nex:
         appen=True
         ga=x.copy()
-        
         if appen:
             sum+=1
             plt.figure(ra)
             nx.draw_planar(x,labels=None, font_size=12, font_color='k', font_family='sans-serif', font_weight='normal', alpha=1.0, bbox=None, ax=None)
-            plt.savefig('RFP2/Len={}/i{}.png'.format(init,ra))
+            plt.savefig('RFP3/Len={}/i{}.png'.format(init,ra))
             # plt.show()
             print(x.edges)
             ra+=1

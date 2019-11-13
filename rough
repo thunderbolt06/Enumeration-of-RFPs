@@ -1,0 +1,24 @@
+enter the number of vertices7
+Inner Graphs for n = 6:  1
+Inner Graphs for n = 6:  1
+Inner Graphs for n = 7:  1
+Inner Graphs for n = 8:  4
+Inner Graphs for n = 9:  8
+Inner Graphs for n = 10:  17
+Inner Graphs for n = 11:  9
+Inner Graphs for n = 12:  7
+Inner Graphs for n = 13:  3
+Inner Graphs for n = 14:  2
+thunderbolt@Thunderbolt:~/code/Enumeration-of-RFPs$ /usr/bin/python3 /home/thunderbolt/code/Enumeration-of-RFPs/igv3.py
+enter the number of vertices7
+Inner Graphs for n = 6:  1
+Inner Graphs for n = 6:  1
+Inner Graphs for n = 7:  1
+Inner Graphs for n = 8:  4
+Inner Graphs for n = 9:  8
+Inner Graphs for n = 10:  17
+Inner Graphs for n = 11:  9
+Inner Graphs for n = 12:  7
+Inner Graphs for n = 13:  3
+Inner Graphs for n = 14:  0
+Inner Graphs for n = 15:  0
