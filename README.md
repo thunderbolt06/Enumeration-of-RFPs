@@ -1,5 +1,5 @@
 # Enumeration-of-RFPs
-Abstract.
+## Abstract.
 
 First, the task is to generate all inner graphs on ‘n’ vertices for which Rectangular floor
 plan is possible. The idea is to first construct a path graph and then to add edges
@@ -13,7 +13,8 @@ graph with n vertices and the final result as the outer graph with n+4 vetices. 
 method gives all possible non-isomorphic maximal graph for n+4 vertices for a given
 inner graph of n vertices.
 
-Introduction
+## Introduction.
+
 In architectural design, the first step is to build a floor plan as per the adjacency
 constraints. Mathematically, the problem is to draw a rectangular floor plan(RPF)
 corresponding to the planar graph satisfying all the adjacency constraints; in which each
