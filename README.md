@@ -1,5 +1,6 @@
 # Enumeration-of-RFPs
-Abstract
+Abstract.
+
 First, the task is to generate all inner graphs on ‘n’ vertices for which Rectangular floor
 plan is possible. The idea is to first construct a path graph and then to add edges
 between two vertices if the length of the shortest path between them is found to be two.
