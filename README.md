@@ -1,6 +1,7 @@
 # Enumeration-of-RFPs
 ## Abstract.
 
+A rectangular floor plan (RFP) is a floor plan in which plan's boundary and each room is a rectangle.
 First, the task is to generate all inner graphs on ‘n’ vertices for which Rectangular floor
 plan is possible. The idea is to first construct a path graph and then to add edges
 between two vertices if the length of the shortest path between them is found to be two.
@@ -15,6 +16,7 @@ inner graph of n vertices.
 
 ## Introduction.
 
+A rectangular floor plan (RFP) is a floor plan in which plan's boundary and each room is a rectangle.
 In architectural design, the first step is to build a floor plan as per the adjacency
 constraints. Mathematically, the problem is to draw a rectangular floor plan(RPF)
 corresponding to the planar graph satisfying all the adjacency constraints; in which each
