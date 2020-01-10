@@ -60,9 +60,9 @@ def makeBig(glist):
                     f = e.subgraph([n for n in e.neighbors(n1)])
                     try:
                         for r4 in nx.cycle_basis(f):
-                            if len(r4)!=len(f):
+                            if len(r4)!=len(f) and len(r4) < 4:
                                 appen= False
-                            elif len(r4)>=4:
+                            else:
                                 check_set.append(set(r4))
                     except:
                         pass
@@ -122,11 +122,11 @@ while(nex):
         app = True
         d = b.copy()
         # bridge case -----------------------
+        cut = list(nx.articulation_points(b))
         for a1 in b.nodes():
             for b1 in b.nodes():
                 if a1 < b1:
                     c = b.copy()
-                    cut = list(nx.articulation_points(c))
                     if c.has_edge(a1, b1):
                         c.remove_node(a1)
                         c.remove_node(b1)
