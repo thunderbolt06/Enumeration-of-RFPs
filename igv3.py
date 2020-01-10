@@ -53,27 +53,48 @@ def makeBig(glist):
             # just cycle case --------------------------------
             r4 = []
             check_set = []
-
+            r5 = []
             for n1 in ga.nodes():
                 e = ga.copy()
                 if ga.degree(n1)>=4:
                     f = e.subgraph([n for n in e.neighbors(n1)])
                     try:
-                        for r4 in nx.cycle_basis(f):
-                            if len(r4)!=len(f):
+                        r4 = (list(nx.simple_cycles(f)))
+                        for r4cyc in r4:
+                            if len(r4cyc)!=len(f) and len(r4cyc)<=4:
                                 appen= False
-                            elif len(r4)>=4:
-                                check_set.append(set(r4))
+                                break
+                            else:
+                                r5.append(r4cyc)
                     except:
                         pass
-            if len(check_set) > 2:
-                print(check_set)
+            j1=0
+            for i1 in r5:
+                j1=j1+1
+                for i2 in r5[j1:]:
+                    if collections.Counter(i1)==collections.Counter(i2):
+                        appen=False
 
-            for it in range(len(check_set)):
-                for jt in range(it+1, len(check_set)):
-                    if len(check_set[it].intersection(check_set[jt])) >= 2:
-                        appen = False
-                        print(check_set[it], check_set[jt])
+            # for n1 in ga.nodes():
+            #     e = ga.copy()
+            #     if ga.degree(n1)>=4:
+            #         f = e.subgraph([n for n in e.neighbors(n1)])
+            #         try:
+            #             for r4 in nx.cycle_basis(f):
+            #                 if len(r4)!=len(f):
+            #                     appen= False
+            #                 elif len(r4)>=4:
+            #                     check_set.append(set(r4))
+            #         except:
+            #             pass
+            # if len(check_set) > 2:
+            #     print(check_set)
+
+            # for it in range(len(check_set)):
+            #     for jt in range(it+1, len(check_set)):
+            #         if len(check_set[it].intersection(check_set[jt])) >= 2:
+            #             appen = False
+            #             print(check_set[it], check_set[jt])
 
 
 
@@ -97,7 +118,8 @@ def makeBig(glist):
             #                         for em2 in cycles2[elemark2:]:
             #                             if em==em2:
             #                                 appen=False
-            
+            if ga.size()>3*init-7:
+                appen=False
             if appen:
                 garr.append(ga)
     return garr
@@ -137,18 +159,17 @@ while(nex):
                                 # print("bridge")
         
         # final---------
-        if b.size()>3*init-7:
-            app=False
+        
         
         if app:
             sum = sum + 1
             plt.figure(ra)
             nx.draw_planar(b,labels=None, font_size=12, font_color='k', font_family='sans-serif', font_weight='normal', alpha=1.0, bbox=None, ax=None)
-            plt.savefig('RFP3/Len={}/{}.png'.format(init,ra))
+            plt.savefig('RFP3/Len={}/new{}.png'.format(init,ra))
             # plt.show()
-            # print(g.edges)
+            print(b.edges)
             ra+=1
-    print("Inner Graphs for n = {}: ".format(b.size()), sum)
+    print("Rectangular Dual Graphs for n = {}: ".format(b.size()), sum)
     # for g in nex:
     #     print(g.edges())1
     nex = g2
