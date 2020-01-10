@@ -66,6 +66,7 @@ def makeBig(glist):
                                 break
                             else:
                                 r5.append(r4cyc)
+
                     except:
                         pass
             j1=0
@@ -144,11 +145,11 @@ while(nex):
         app = True
         d = b.copy()
         # bridge case -----------------------
+        cut = list(nx.articulation_points(b))
         for a1 in b.nodes():
             for b1 in b.nodes():
                 if a1 < b1:
                     c = b.copy()
-                    cut = list(nx.articulation_points(c))
                     if c.has_edge(a1, b1):
                         c.remove_node(a1)
                         c.remove_node(b1)
