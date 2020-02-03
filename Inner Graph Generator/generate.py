@@ -8,6 +8,7 @@ def dist2_nodepairs(given_graph):
         for nod2 in given_graph.nodes():
             if nx.shortest_path_length(given_graph, nod, nod2) == 2:
                 edge_list.append((nod, nod2))
+    return edge_list
 
 
 def graph_exists(given_graph, graph_list):
@@ -24,7 +25,7 @@ def is_bridge_case(given_graph):
     for edge in given_graph.edges():
         # INSTEAD: check vertex_connectivity of nod1 + nod2 - 1?
         test_bridge_graph = given_graph.copy()
-        nod1, nod2 = *edge
+        nod1, nod2 = edge
         if (nod1 in cutvertices and nod2 in cutvertices) \
                 or (nod1 not in cutvertices and nod2 not in cutvertices):
             if nx.number_connected_components(test_bridge_graph) > 2:
@@ -81,7 +82,15 @@ def run_generations(init_len):
     """
     current_gen = [nx.path_graph(init_len)]
     complete_graph_list = current_gen.copy()
-    while len(current_gen) and current_gen[0].size() > (3*init_len - 7):
+    while len(current_gen) and current_gen[0].size() < (3*init_len - 7):
         current_gen = generation_next(current_gen)
+        show_graph_list(current_gen)
         complete_graph_list.extend(filter_bridge_case(current_gen))
     return current_gen
+
+
+def show_graph_list(listg):
+    for graph in listg:
+        print(graph.nodes)
+        print(graph.edges)
+        print('\n')
