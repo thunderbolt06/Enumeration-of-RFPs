@@ -5,7 +5,7 @@ import networkx as nx
 
 
 def plot_graphs(init_len, graph_list):
-    os.makedirs("./RFP_Graph_Plots/Len {}".format(init_len), True)
+    os.makedirs("./RFP_Graph_Plots/Len {}".format(init_len), 777,True)
     graph_no = 1
     for graph in graph_list:
         plt.figure(graph_no)

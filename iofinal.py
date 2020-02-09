@@ -14,8 +14,8 @@ def wmatch(e1, e2):
 def edge_calc(g):
     e= 3*(len(g)+4)-7-4-g.size()
     # print(g.nodes)
-    y= []
-    x= []
+    y= [] # is the min number of edges to be added
+    x= [] # is the max number of edges 
     for i in range(len(g.nodes())):
         a=g.copy()
         a.remove_node(i)
