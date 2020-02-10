@@ -1,17 +1,22 @@
-#!bin/python
-import networkx as nx
+#!/bin/python
+# import networkx as nx
 # import warnings
 from generate import run_generations
 from plot_graphs import plot_graphs
-from pprint import pprint
+from componentcheck import cip_rule_filter
+# from pprint import pprint
 
 # warnings.simplefilter("ignore")
 
+# Get Initial no. of Vertices
 init_len = int(input("Enter the number of vertices: "))
 
+# Generate and store all generations of graphs
 listofgraphs = run_generations(init_len)
+print(f'Final No. of Graphs: {len(listofgraphs)}')
 
-for g in listofgraphs:
-	print(g.nodes)
+# Filter based on CIP rule
+# cip_graphs = cip_rule_filter(listofgraphs)
+# len(cip_graphs)
 
-plot_graphs(init_len, listofgraphs)
+# plot_graphs(init_len, listofgraphs)

@@ -24,10 +24,12 @@ def is_bridge_case(given_graph):
     cutvertices = list(nx.articulation_points(given_graph))
     for edge in given_graph.edges():
         # INSTEAD: check vertex_connectivity of nod1 + nod2 - 1?
-        test_bridge_graph = given_graph.copy()
         nod1, nod2 = edge
         if (nod1 in cutvertices and nod2 in cutvertices) \
                 or (nod1 not in cutvertices and nod2 not in cutvertices):
+            test_bridge_graph = given_graph.copy()
+            test_bridge_graph.remove_node(nod1)
+            test_bridge_graph.remove_node(nod2)
             if nx.number_connected_components(test_bridge_graph) > 2:
                 return 1
     return 0
@@ -66,10 +68,9 @@ def generation_next(prev_gen):
         for test_edge in select_edges:
             test_graph = original_graph.copy()
             test_graph.add_edge(*test_edge)
-
-        if not graph_exists(test_graph, next_gen) \
-                and check_test_graph(test_graph):
-            next_gen.append(test_graph)
+            if (not graph_exists(test_graph, next_gen)) \
+                    and check_test_graph(test_graph):
+                next_gen.append(test_graph)
 
     return next_gen
 
@@ -80,17 +81,19 @@ def run_generations(init_len):
     - Runs generations till 3*(edges) - 7
     - complete_graph_list is list of all graphs
     """
+    num_graphs = 0
     current_gen = [nx.path_graph(init_len)]
     complete_graph_list = current_gen.copy()
     while len(current_gen) and current_gen[0].size() < (3*init_len - 7):
         current_gen = generation_next(current_gen)
-        show_graph_list(current_gen)
+        num_graphs += show_graph_list(current_gen, 1)
         complete_graph_list.extend(filter_bridge_case(current_gen))
-    return current_gen
+    print(f'No. Graphs (including Bridge Case): {num_graphs}')
+    return complete_graph_list
 
 
-def show_graph_list(listg):
-    for graph in listg:
-        print(graph.nodes)
-        print(graph.edges)
-        print('\n')
+def show_graph_list(listg, print_graphs=0):
+    if print_graphs:
+        for graph in listg:
+            print(graph.edges)
+    return len(listg)
