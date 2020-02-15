@@ -121,7 +121,6 @@ def complex_triangle_check(comp):
     if len(outer_vertices) is 3:
         if len(comp)!=3:
             return False
-    
     return True
 
 
