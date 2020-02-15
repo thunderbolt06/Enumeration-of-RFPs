@@ -5,7 +5,6 @@ import numpy as np
 import matplotlib.pyplot as plt # Matplot lib
 
 
-
 #  NESW Function
 def num_cips(G):
     H = G.to_directed()
@@ -88,8 +87,8 @@ def num_cips(G):
                  cip[len(cip)-1].append(cip[0][0])
              elif (last_cip == 1 and first_cip == 1):     #making a new corner implying path
                  cip.append([outer_vertices[0],cip[0][0]])
-    print("Number of corner implying paths: ", len(cip))
-    print("Corner implying paths: ", cip)
+    # print("Number of corner implying paths: ", len(cip))
+    # print("Corner implying paths: ", cip)
     return len(cip)
 
     # def create_cip(index):

@@ -14,20 +14,24 @@ def cip_rule_filter(graph_list):
     for graph in graph_list:
         cip_check = True
         outer_comps, inner_comps, single_component = component_break(graph)
+        # list, list, element
+        # print(outer_comps, inner_comps, single_component)
         # CIP Rule for Outer Components
         for comp in outer_comps:
-            if num_cips(comp) > 2:
-                if not complex_triangle_check(comp):
-                    cip_check = False
+            print(comp.edges)
+            if num_cips(comp) > 2 and not complex_triangle_check(comp):
+                cip_check = False
+                print('FALSE')
         # CIP Rule for Outer Components
         for comp in inner_comps:
-            if num_cips(comp) > 0:
-                if not complex_triangle_check(comp):
-                    cip_check = False
-        # CIP Rule for single_component Components
-        if num_cips(single_component) > 4:
-            if not complex_triangle_check(comp):
+            print(comp.edges)
+            if num_cips(comp) > 0 and not complex_triangle_check(comp):
                 cip_check = False
+                print(cip_check)
+        # CIP Rule for single_component Components
+        if num_cips(single_component) > 4 and not complex_triangle_check(comp):
+            cip_check = False
+            print(cip_check)
         if cip_check:
             filtered_graphs.append(graph)
     return filtered_graphs
@@ -47,7 +51,7 @@ def cip_rule_check(graph):
     for comp in outer_comps:
         if num_cips(comp) > 2:
             cip_check = False
-        
+
     # CIP Rule for Outer Components
     for comp in inner_comps:
         if num_cips(comp) > 0:
@@ -56,6 +60,7 @@ def cip_rule_check(graph):
     if num_cips(single_component) > 4:
         cip_check = False
     return cip_check
+
 
 def component_break(given_graph):
     """
@@ -69,12 +74,14 @@ def component_break(given_graph):
     # O(biconnected_components * cutvertices)
     inner_components = []
     outer_components = []
-    for peice in nx.biconnected_components(test_graph):
+    for peice_edges in nx.biconnected_component_edges(test_graph):
         # Find num cutvertices
         # num_cutverts = nx.intersection(peice, cutvertices)
+        peice = nx.Graph()
+        peice.add_edges_from(list(peice_edges))
         num_cutverts = 0
         for cutvert in cutvertices:
-            if cutvert in peice:
+            if cutvert in peice.nodes():
                 num_cutverts += 1
 
         if num_cutverts == 2:
@@ -112,7 +119,6 @@ def complex_triangle_check(comp):
         if count == 2:
             outer_boundary.append(edge)
 
-    
     # Get Vertex-Set of outerboundary
     outer_vertices = []
     for edge in outer_boundary:
@@ -121,11 +127,7 @@ def complex_triangle_check(comp):
         if edge[1] not in outer_vertices:
             outer_vertices.append(edge[1])
 
-    if len(outer_vertices) is 3:
-        if len(comp)!=3:
+    if len(outer_vertices) == 3:
+        if len(comp) != 3:
             return False
     return True
-
-
-
-
