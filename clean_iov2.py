@@ -16,7 +16,7 @@ def wmatch(e1, e2):
 
 def edge_remover(num_nodes, edgeval, x, y):
     """Removes Edges Helper Function"""
-    for i1 in num_nodes():
+    for i1 in num_nodes:
         # print("x in ",i1,"is",x[i1])
         # print("y is ",i1,"is",y[i1])
         if x[i1] > y[i1]:
@@ -24,6 +24,7 @@ def edge_remover(num_nodes, edgeval, x, y):
         else:
             edgeval -= x[i1]
     print("edges remaining", edgeval)
+    return edgeval
 
 
 
@@ -33,8 +34,8 @@ def edge_remover(num_nodes, edgeval, x, y):
 def edge_calc(g):
     edgeval = 3*(len(g)+4)-7-4-g.size()
     # print(g.nodes)
-    y = []
-    x = []
+    y = []      # Min no. of edges to be added
+    x = []      # Max no. of edges that added
     for i in range(len(g.nodes())):
         a = g.copy()
         a.remove_node(i)
@@ -53,7 +54,7 @@ def edge_calc(g):
         if x[i] < 3:
             y[i] = x[i]
 
-        edge_remover(g.nodes, edgeval, x, y)
+        edgeval = edge_remover(g.nodes(), edgeval, x, y)
 
     # edge_adder ----------------------------
     garr = []
@@ -66,19 +67,19 @@ def edge_calc(g):
     # print(nodelist, nodestoadd)
     n = len(g.nodes())
 
-    if edgeval == 0:
-        p = n
-        g.add_edges_from([(n+i, n+i+1) for i in range(3)], id=2)
-        g.add_edges_from([(n, n+3)], id=2)
-        for r in range(n):
-            while y[r] > 0:
-                g.add_edges_from([(r, p)], id=2)
-                y[r] -= 1
-                p += 1
-                if p is n+4 and y[r] > 0:
-                    p = n
-            p -= 1
-        garr.append(g)
+#    if edgeval == 0:
+#        p = n
+#        g.add_edges_from([(n+i, n+i+1) for i in range(3)], id=2)
+#        g.add_edges_from([(n, n+3)], id=2)
+#        for r in range(n):
+#            while y[r] > 0:
+#                g.add_edges_from([(r, p)], id=2)
+#                y[r] -= 1
+#                p += 1
+#                if p is n+4 and y[r] > 0:
+#                    p = n
+#            p -= 1
+#        garr.append(g)
 
     graph2 = g.clone()
     graph2.add_nodes_from(nodestoadd)
@@ -94,7 +95,6 @@ def check_combinations(combo, new_graph, z, graph_list):
         zx = []
         for i in range(len(z)):
             zx.append((i, z[i]))
-
         for known_graph in graph_list:
             if nx.is_isomorphic(known_graph, new_graph, edge_match=None):
                 return False
@@ -104,8 +104,7 @@ def check_combinations(combo, new_graph, z, graph_list):
 
 
 edgeset3 = [
-
-    [(0, 1), (0, 2), (0, 3), (1, 2), (2, 3), (3, 4), (4, 5)]
+[(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 4), (1, 5), (2, 3), (3, 4), (4, 5)]
 ]
 for ed in edgeset3:
     g = nx.Graph()
@@ -113,15 +112,15 @@ for ed in edgeset3:
     n = len(g.nodes())
     # print('G is ', g.edges())
     glist = edge_calc(g)
-    i = 0
-    cpp = True
-    for gb in glist:
-        gb.add_edges_from([(n+i, n+i+1) for i in range(3)])
-        gb.add_edge(n, n+3)
-        r5 = []
+    # i = 0
+    # cpp = True
+    # for gb in glist:
+    #     gb.add_edges_from([(n+i, n+i+1) for i in range(3)])
+    #     gb.add_edge(n, n+3)
+    #     r5 = []
 
-        print(gb.edges())
-        i += 1
+    #     print(gb.edges())
+    #     i += 1
     # for gn in glist:
     # print(gn.edges())
     print('the final no.: {}'.format(i))
