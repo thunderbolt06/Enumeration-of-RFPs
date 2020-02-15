@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt # Matplot lib
 
 
 #  NESW Function
-def add_nesw_vertices(matrix):
-    G = nx.from_numpy_matrix(matrix)
-    H = G.to_directed()
+def num_cips(G):
+    # H = G.to_directed()
+    H = G.copy()
 
     # Get all triangles
     all_cycles = list(nx.simple_cycles(H))
@@ -89,33 +89,33 @@ def add_nesw_vertices(matrix):
                  cip[len(cip)-1].append(cip[0][0])
              elif (last_cip == 1 and first_cip == 1):     #making a new corner implying path
                  cip.append([outer_vertices[0],cip[0][0]])
-    
     print("Number of corner implying paths: ", len(cip))
     print("Corner implying paths: ", cip)
+    return len(cip)
 
-    if len(cip) > 4:
-        print("Error! More than 4 corner implying paths")
-        exit()
+    # def create_cip(index):
+    #     cip.insert(index + 1, cip[index])
+    #     cip[index] = cip[index][0:2]
+    #     del cip[index + 1][0:1]
+    # if len(cip) > 4:
+    #     print("Error! More than 4 corner implying paths")
+    #     exit()
 
-    def create_cip(index):
-        cip.insert(index + 1, cip[index])
-        cip[index] = cip[index][0:2]
-        del cip[index + 1][0:1]
 
-    if(len(cip)<4):
-        for i in range(4-len(cip)):
-            index = cip.index(max(cip,key =len))
-            create_cip(index)
-    print("Four corner implying paths are: ",cip)
+    # if(len(cip)<4):
+    #     for i in range(4-len(cip)):
+    #         index = cip.index(max(cip,key =len))
+    #         create_cip(index)
+    # print("Four corner implying paths are: ",cip)
 
 
 # Sample Input
-matrix = np.matrix([[0,1,1,1,0],
- [1,0,1,0,1],
- [1,1,0,1,1],
- [1,0,1,0,1],
- [0,1,1,1,0]])
-add_nesw_vertices(matrix)
+# matrix = np.matrix([[0,1,1,1,0],
+#  [1,0,1,0,1],
+#  [1,1,0,1,1],
+#  [1,0,1,0,1],
+#  [0,1,1,1,0]])
+# add_nesw_vertices(matrix)
 
 
 
