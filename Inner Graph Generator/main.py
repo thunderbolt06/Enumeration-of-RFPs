@@ -21,7 +21,7 @@ listofgraphs = run_generations(init_len)
 print(f'Final No. of Graphs: {len(listofgraphs)}')
 
 # Filter based on CIP rule
-# cip_graphs = cip_rule_filter(listofgraphs)
-# len(cip_graphs)
+cip_graphs = cip_rule_filter(listofgraphs)
+len(cip_graphs)
 
 # plot_graphs(init_len, listofgraphs)

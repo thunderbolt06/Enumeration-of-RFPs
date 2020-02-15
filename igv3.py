@@ -137,10 +137,9 @@ ra=1
 while(nex):
     g2 = makeBig(nex)
     sum = 0
+    # Take listofgraphs at every iter and for each graph 'd' (a copy)
     for b in nex:
-        
         app = True
-        d = b.copy()
         # bridge case -----------------------
         cut = list(nx.articulation_points(b))
         for a1 in b.nodes():
@@ -154,12 +153,7 @@ while(nex):
                         if a1 in cut and b1 in cut or a1 not in cut and b1 not in cut:
                             if nx.number_connected_components(c) > 2:
                                 app = False
-                                # print("bridge")
-        
-        # final---------
-        
-        
-        if app:
+                                print("bridge")
             sum = sum + 1
             plt.figure(ra)
             nx.draw_planar(b,labels=None, font_size=12, font_color='k', font_family='sans-serif', font_weight='normal', alpha=1.0, bbox=None, ax=None)
