@@ -39,7 +39,6 @@ def makeBig(glist):
 
             # Check if graph g is isomorphic to any of the previous graphs so far
             appen = True
-            
             if not nx.check_planarity(ga)[0]:
                 appen = False
             gm_k4_check = GraphMatcher(ga, nx.complete_graph(4))
@@ -59,10 +58,8 @@ def makeBig(glist):
                 if ga.degree(n1)>=4:
                     f = e.subgraph([n for n in e.neighbors(n1)])
                     try:
-                        r4 = (list(nx.simple_cycles(f)))
-                        for r4cyc in r4:
-                            if len(r4cyc)!=len(f) and len(r4cyc)<=4:
-                                appen= False
+                 mincut= min(cutset)
+        maxcut= max(cutset)                   appen= False
                                 break
                             else:
                                 r5.append(r4cyc)

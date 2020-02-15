@@ -8,9 +8,6 @@ import matplotlib.pyplot as plt # Matplot lib
 
 #  NESW Function
 def add_nesw_vertices(matrix):
-    G = nx.from_numpy_matrix(matrix)
-    H = G.to_directed()
-
     # Get all triangles
     all_cycles = list(nx.simple_cycles(H))
     all_triangles = []
@@ -58,9 +55,9 @@ def add_nesw_vertices(matrix):
         cip.append(cip_store)		#adds the corner implying path to cip
         outer_vertices.insert(0, cip_store[len(cip_store) - 1])	#handles the last vertex of the corner implying path added
         if len(outer_vertices) == 1:		#works for the last vertex left in the boundary
-             last_cip=0;
-             first_cip=0;
-             merge_possible =0;
+             last_cip=0
+             first_cip=0
+             merge_possible =0
              for test in cip[len(cip)-1]:			#checks last corner implying path
                  if((test,cip[0][0]) in H.edges and (test,cip[0][0]) not in outer_boundary ):
                      last_cip = 1

@@ -10,6 +10,7 @@ def plot_graphs(init_len, graph_list):
     for graph in graph_list:
         plt.figure(graph_no)
         nx.draw_planar(graph, with_labels=True, font_size=12)
-        plt.savefig('Graph_edges_{1} - {2}.png'.format(
-                    init_len, graph.size(), graph_no))
+        plt.show()
+        # plt.savefig("Graph_edges_{1} - {2}.png".format(
+        #             init_len, graph.size(), graph_no))
         graph_no += 1

@@ -10,8 +10,10 @@ from pprint import pprint
 init_len = int(input("Enter the number of vertices: "))
 
 listofgraphs = run_generations(init_len)
-
+print(len(listofgraphs))
 for g in listofgraphs:
+	print("he")
 	print(g.nodes)
 
 plot_graphs(init_len, listofgraphs)
+print("hi")
