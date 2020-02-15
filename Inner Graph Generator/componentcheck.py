@@ -30,6 +30,30 @@ def cip_rule_filter(graph_list):
     return filtered_graphs
 
 
+def cip_rule_check(graph):
+    """
+    Given A Graph
+    Returns true if cip rule is satisfied
+
+    CIP Rule = 2 CIP on outer biconnected components and no CIP on
+    inner biconnected components
+    """
+    cip_check = True
+    outer_comps, inner_comps, single_component = component_break(graph)
+    # CIP Rule for Outer Components
+    for comp in outer_comps:
+        if num_cips(comp) > 2:
+            cip_check = False
+        
+    # CIP Rule for Outer Components
+    for comp in inner_comps:
+        if num_cips(comp) > 0:
+            cip_check = False
+    # CIP Rule for single_component Components
+    if num_cips(single_component) > 4:
+        cip_check = False
+    return cip_check
+
 def component_break(given_graph):
     """
     Given a graph,
@@ -65,3 +89,41 @@ def component_break(given_graph):
             print(test_graph)
 
     return outer_components, inner_components, single_component
+
+
+def complex_triangle_check(comp):
+    # Get all triangles
+    all_cycles = list(nx.simple_cycles(comp))
+    all_triangles = []
+    for cycle in all_cycles:
+        if len(cycle) == 3:
+            all_triangles.append(cycle)
+
+    # Get edges on outer boundary
+    outer_boundary = []
+    for edge in comp.edges:
+        count = 0
+        for triangle in all_triangles:
+            if edge[0] in triangle and edge[1] in triangle:
+                count += 1
+        if count == 2:
+            outer_boundary.append(edge)
+
+    
+    # Get Vertex-Set of outerboundary
+    outer_vertices = []
+    for edge in outer_boundary:
+        if edge[0] not in outer_vertices:
+            outer_vertices.append(edge[0])
+        if edge[1] not in outer_vertices:
+            outer_vertices.append(edge[1])
+
+    if len(outer_vertices) is 3:
+        if len(comp)!=3:
+            return False
+    
+    return True
+
+
+
+

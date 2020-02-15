@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import networkx as nx
 def plot_graphs(graph_list):
     try:
-        os.mkdir("./RFP_Graph_Plots")
-        os.mkdir("./RFP_Graph_Plots/Len {}".format(init_len))
+        os.mkdirs("./RFP_Graph_Plots")
+        os.mkdirs("./RFP_Graph_Plots/Len {}".format(init_len))
     except:
         pass
     graph_no = 4

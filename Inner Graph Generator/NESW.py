@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt # Matplot lib
 
 #  NESW Function
 def num_cips(G):
-    # H = G.to_directed()
-    H = G.copy()
+    H = G.to_directed()
+    # H = G.copy()
 
     # Get all triangles
     all_cycles = list(nx.simple_cycles(H))
@@ -58,9 +58,9 @@ def num_cips(G):
         cip.append(cip_store)		#adds the corner implying path to cip
         outer_vertices.insert(0, cip_store[len(cip_store) - 1])	#handles the last vertex of the corner implying path added
         if len(outer_vertices) == 1:		#works for the last vertex left in the boundary
-             last_cip=0;
-             first_cip=0;
-             merge_possible =0;
+             last_cip=0
+             first_cip=0
+             merge_possible =0
              for test in cip[len(cip)-1]:			#checks last corner implying path
                  if((test,cip[0][0]) in H.edges and (test,cip[0][0]) not in outer_boundary ):
                      last_cip = 1
