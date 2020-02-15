@@ -1,5 +1,5 @@
 #!/bin/python
-# import networkx as nx
+import networkx as nx
 # import warnings
 from generate import run_generations
 # from plot_graphs import plot_graphs
@@ -21,7 +21,7 @@ listofgraphs = run_generations(init_len)
 print(f'Final No. of Graphs: {len(listofgraphs)}')
 
 # Filter based on CIP rule
-# cip_graphs = cip_rule_filter(listofgraphs)
-# len(cip_graphs)
+cip_graphs = cip_rule_filter(listofgraphs)
+len(cip_graphs)
 
 # plot_graphs(init_len, listofgraphs)

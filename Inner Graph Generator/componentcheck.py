@@ -17,14 +17,17 @@ def cip_rule_filter(graph_list):
         # CIP Rule for Outer Components
         for comp in outer_comps:
             if num_cips(comp) > 2:
-                cip_check = False
+                if not complex_triangle_check(comp):
+                    cip_check = False
         # CIP Rule for Outer Components
         for comp in inner_comps:
             if num_cips(comp) > 0:
-                cip_check = False
+                if not complex_triangle_check(comp):
+                    cip_check = False
         # CIP Rule for single_component Components
         if num_cips(single_component) > 4:
-            cip_check = False
+            if not complex_triangle_check(comp):
+                cip_check = False
         if cip_check:
             filtered_graphs.append(graph)
     return filtered_graphs
