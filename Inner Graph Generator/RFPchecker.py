@@ -14,8 +14,10 @@ def RFPchecker(graph):
         check = True
     if check:
         print("RFP exists")
+        plot_graphs(len(graph),[graph])
     else:
         print("RFP doesn't exist")
+    
 
     
 

@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt # Matplot lib
 def num_cips(G):
     H = G.to_directed()
     # H = G.copy()
-
     # Get all triangles
     all_cycles = list(nx.simple_cycles(H))
     all_triangles = []
@@ -116,5 +115,8 @@ def num_cips(G):
 #  [0,1,1,1,0]])
 # add_nesw_vertices(matrix)
 
-
+g=nx.Graph()
+g.add_edges_from([(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 4), (1, 5),
+ (2, 3), (2, 5), (3, 4), (3, 5), (4, 5)])
+print(num_cips(g))
 

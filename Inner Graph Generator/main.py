@@ -1,5 +1,5 @@
 #!/bin/python
-# import networkx as nx
+import networkx as nx
 # import warnings
 from generate import run_generations
 # from plot_graphs import plot_graphs

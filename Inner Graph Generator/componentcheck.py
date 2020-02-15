@@ -19,19 +19,19 @@ def cip_rule_filter(graph_list):
         # CIP Rule for Outer Components
         for comp in outer_comps:
             print(comp.edges)
-            if num_cips(comp) > 2:
+            if num_cips(comp) > 2 and not complex_triangle_check(comp):
                 cip_check = False
                 print('FALSE')
         # CIP Rule for Outer Components
         for comp in inner_comps:
             print(comp.edges)
-            if num_cips(comp) > 0:
+            if num_cips(comp) > 0 and not complex_triangle_check(comp):
                 cip_check = False
-                print('FALSE')
+                print(cip_check)
         # CIP Rule for single_component Components
-        if num_cips(single_component) > 4:
-            print('FALSE')
+        if num_cips(single_component) > 4 and not complex_triangle_check(comp):
             cip_check = False
+            print(cip_check)
         if cip_check:
             filtered_graphs.append(graph)
     return filtered_graphs
