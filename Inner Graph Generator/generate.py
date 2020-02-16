@@ -42,10 +42,12 @@ def filter_bridge_case(graph_list):
 def check_test_graph(given_graph):
     # Planarity Check
     if not nx.check_planarity(given_graph)[0]:
+        print("planarity failed")
         return 0
     # Subgraph is K4
     if GraphMatcher(given_graph,
                     nx.complete_graph(4)).subgraph_is_isomorphic():
+        print("K4 subgraph")
         return 0
     # Some other random checks!
     return 1

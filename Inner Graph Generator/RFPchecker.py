@@ -7,27 +7,39 @@ from componentcheck import cip_rule_check
 import networkx as nx
 def RFPchecker(graph):
     check= True
+
     if not check_test_graph(graph):
         check = False
-        print("main check failed")
+        
     if not cip_rule_check(graph):
         check = False
         print("cip rule failed")
+    
     if not complex_triangle_check(graph):
         check = False
         print("contains complex triangle")
+    
     if check:
         print("RFP exists")
         plot_graphs(len(graph),[graph])
         # plot_graph([graph])
     else:
         print("RFP doesn't exist")
+        plot_graphs(len(graph),[graph])
 
 g=nx.Graph()
-# g.add_edges_from([(0, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 3), (2, 5), (3, 4), (4, 5)])
-# g.add_edges_from([(0, 1), (1, 2),  (2, 3), (0,3),(1,3),(0,2)])
-g.add_edges_from([(0, 1), (1, 2),  (2, 3), (3,4),(1,3)])
+# g.add_edges_from([(0, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 3), (2, 5), (3, 4), (4, 5)]) #wrapped vertex attached
+g.add_edges_from([(0, 1), (1, 2),  (2, 3), (0,3),(1,3),(0,2)]) #complex triangle
+# g.add_edges_from([(0, 1), (1, 2),  (2, 3), (3,4),(1,3)]) #cip rule
+# g.add_edges_from([(0, 1), (1, 2), (0,2),(3,4),(4,5),(5,3),(0,3),(0,4),(0,5),(2,4),(1,4),(2,5)]) #k4 subgraph
 
+# g.add_edges_from([(0, 1), (0, 9), (1, 2), (1, 3), (1, 9), (2, 3), (3, 4),
+    #  (3, 5), (3, 9), (4, 5), (5, 6), (5, 7), (5, 9), (6, 7), (7, 8), (7, 9), (8, 9)]) #6 cips
+
+# g.add_edges_from([(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 4),
+#  (1, 5), (2, 3), (2, 5), (3, 4), (3, 5), (4, 5)])#complex without K4
+
+g.add_edges_from([(0, 1), (1, 2), (2,0)])
 
 RFPchecker(g)
 

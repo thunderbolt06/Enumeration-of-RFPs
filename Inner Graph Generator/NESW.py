@@ -118,5 +118,5 @@ def num_cips(G):
 g=nx.Graph()
 g.add_edges_from([(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 4), (1, 5),
  (2, 3), (2, 5), (3, 4), (3, 5), (4, 5)])
-print(num_cips(g))
+# print(num_cips(g))
 
