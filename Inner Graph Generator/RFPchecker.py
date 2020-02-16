@@ -6,13 +6,16 @@ from componentcheck import complex_triangle_check
 from componentcheck import cip_rule_check
 import networkx as nx
 def RFPchecker(graph):
-    check= False
-    if check_test_graph(graph):
-        check = True
-    if cip_rule_check(graph):
-        check = True
-    if complex_triangle_check(graph):
-        check = True
+    check= True
+    if not check_test_graph(graph):
+        check = False
+        print("main check failed")
+    if not cip_rule_check(graph):
+        check = False
+        print("cip rule failed")
+    if not complex_triangle_check(graph):
+        check = False
+        print("contains complex triangle")
     if check:
         print("RFP exists")
         plot_graphs(len(graph),[graph])

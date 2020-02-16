@@ -101,33 +101,39 @@ def component_break(given_graph):
     return outer_components, inner_components, single_component
 
 
-def complex_triangle_check(comp):
-    # Get all triangles
-    all_cycles = list(nx.simple_cycles(comp))
-    all_triangles = []
-    for cycle in all_cycles:
-        if len(cycle) == 3:
-            all_triangles.append(cycle)
+def complex_triangle_check(graph):
+    for compedges in nx.biconnected_component_edges(graph):
+        comp=nx.Graph()
+        comp.add_edges_from(compedges)
+        
+        comp=comp.to_directed()
 
-    # Get edges on outer boundary
-    outer_boundary = []
-    for edge in comp.edges:
-        count = 0
-        for triangle in all_triangles:
-            if edge[0] in triangle and edge[1] in triangle:
-                count += 1
-        if count == 2:
-            outer_boundary.append(edge)
+        # Get all triangles
+        all_cycles = list(nx.simple_cycles(comp))
+        all_triangles = []
+        for cycle in all_cycles:
+            if len(cycle) == 3:
+                all_triangles.append(cycle)
 
-    # Get Vertex-Set of outerboundary
-    outer_vertices = []
-    for edge in outer_boundary:
-        if edge[0] not in outer_vertices:
-            outer_vertices.append(edge[0])
-        if edge[1] not in outer_vertices:
-            outer_vertices.append(edge[1])
+        # Get edges on outer boundary
+        outer_boundary = []
+        for edge in comp.edges:
+            count = 0
+            for triangle in all_triangles:
+                if edge[0] in triangle and edge[1] in triangle:
+                    count += 1
+            if count == 2:
+                outer_boundary.append(edge)
 
-    if len(outer_vertices) == 3:
-        if len(comp) != 3:
-            return False
+        # Get Vertex-Set of outerboundary
+        outer_vertices = []
+        for edge in outer_boundary:
+            if edge[0] not in outer_vertices:
+                outer_vertices.append(edge[0])
+            if edge[1] not in outer_vertices:
+                outer_vertices.append(edge[1])
+
+        if len(outer_vertices) == 3:
+            if len(comp) != 3:
+               return False
     return True
