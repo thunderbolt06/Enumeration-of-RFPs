@@ -1,6 +1,6 @@
 import networkx as nx
 from NESW import num_cips
-
+from civcount import civfinder
 
 def cip_rule_filter(graph_list):
     """
@@ -140,3 +140,39 @@ def complex_triangle_check(graph):
                 
                 return False
     return True
+
+
+
+def civ_rule_check(graph):
+    a = 0
+    a += 1
+    civ_check = True
+    outer_comps, inner_comps, single_component = component_break(graph)
+    # list, list, element
+    # print(outer_comps, inner_comps, single_component)
+    if not single_component:
+        # CIP Rule for Outer Components
+        for comp in outer_comps:
+            cut= nx.articulation_points(comp)
+            civ_check= eachcompciv(comp,cut,2)
+        # CIP Rule for Inner Components
+        for comp in inner_comps:
+            cut= nx.articulation_points(comp)
+            civ_check= eachcompciv(comp,cut,0)
+    else:
+        # CIP Rule for single_component Components
+        cut = []
+        civ_check= eachcompciv(single_component,cut,4)
+    return civ_check
+
+def eachcompciv(graph,cut,maxciv):
+    set1= set(cut)
+    print(f"cut set ")
+    print(list(cut))
+
+    y= [ i for i in set(civfinder(graph)) if i not in set1]
+    x=len(y)
+    print(f"num civs ={x}")
+    if x>maxciv :
+        # print(f"num cips ={x}")
+        return False

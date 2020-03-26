@@ -1,0 +1,79 @@
+CIVs
+
+Axiom 1: An RFP has 4 corners
+
+definition:
+    1. Block : A rectangular part/rectangle of an RFP or a vertex in its dual graph.
+    2. Cyclic rotation: shrinking and expanding of vertices such that the adjacency is not disturbed.
+    3. Isomorphic drawings: Drawings of RFP of a graph which are be found by cyclic rotations
+
+Theorem 2 : Every bi-connected components of a graph forms a sub-RFP with the cut vertices taking 2 corners..
+    Corollary: Number of free corners in a sub-RFP is 4-(2*cut-vertices)
+        Corollary: Any sub-RFP can have only 2 cut-vertices. 
+
+Implications: Every dual graph can be divided into sub-RFP and then be later joined together. If a dual graph doesn't exist
+    then it means that the conflict lies in the sub-RFP and can be corrected accordingly.
+
+Note: Generic cyclic rotations can't be followed on sub-RFPs because the cut vertex is fixed and must always take up 2 corner.
+    Modified cyclic rotation: Cyclic rotation with restriction on rotation of cut vertices.
+
+Assume S be a sub-RFP of a dual graph.
+
+The blocks can be of 5 types
+
+4 sided blocks: blocks which take 4 open sides in that drawing
+    This case is trivial with just 1 block in the sub-RFP
+
+3 sided blocks: blocks which take 3 open sides in that drawing
+    Can exist with vertices in a 2-point sub-RFP or can exist when there are cut-vertices as cut-vertices take up 2 corners.
+
+2 sided blocks: blocks which take 2 open sides in that drawing
+    These blocks can have opposite sides or adjacent sides open. 
+        If the block has opposite sides open then it becomes a cut-vertices for the sub-RFP.Contradiction because we have 
+        taken bi-connected components as sub-RFP. So these kind of blocks take up corners.
+
+1 sided blocks: blocks which take 1 open side in that drawing
+    These are all un-wrapped generic blocks.
+
+0 sided blocks: blocks which take 0 open sides in all isomorphic drawings.
+    These are wrapped blocks which have no open sides.
+
+corner-impying-vertices(civ): vertices that take with 2 open sides in all their isomorphic drawings.
+Face-impying vertices(fiv): vertices that take with 3 open sides in all their isomorphic drawings.
+
+Lemma: every fiv is a civ.
+
+Theorem 3: Corner blocks are those with or degree 2 in a sub-RFP.
+    Let x be a block in a sub-RFP s.
+    Assume x is a corner
+    Case 1: x is of degree 1:- This is a trivial case with K2 graph where x takes up 2 corners.
+    Case 2: x is of degree 2:- As x is a corner, 2 sides are open. Now the other 2 sides would be taken up by other 2 adjacent vetices.
+    Case 3: x is of degree 3:- As x is a corner, 2 sides are open. Now we have 2 sides left 2 fill with 3 blocks. So one block takes 
+                                one side and other 2 take the other. Now try to do a cyclic rotation. We see that by cyclic rotation
+                                there is possibility that x can be removed from the corner. Therefore x is not a corner by definition
+                                of 2 sided blocks.
+    Case 4: x is of degree 4 and above:- Follows from case 3.
+
+    Therefore corner block can take up only degree 1 or degree 2 vertices in a dual graph.
+
+
+
+defn: Wrapped vertex: 0 sided blocks are wrapped vertices in its dual graph.
+
+Cycles in a dual graph:
+Let c be a cycle in a dual graph:
+There can be vertices inside c or outside c in a planar embedding.
+Every cycle has exactly 1 outer vertices set and 1 inner vertices set in its RFP
+And there can't be a connection between the inner and outer vertices because dual graph must be planar.
+
+Theorem 4: there can't exist any complex triangles
+
+outer vertices set and inner vertices set can be choosen if they follow the below rules.
+
+Rule 1: the sub-graph formed by the cycle and inner vertices must form an RFP with the cycle taking all corners i.e,
+    inner vertices can't be CIV.
+Rule 2: 
+
+
+
+
